@@ -1,0 +1,46 @@
+{
+  "name": "DPChat",
+  "version": "1.0.0",
+  "description": "DPChat app",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "application",
+    "openshift"
+  ],
+  "author": {
+    "name": "//&gt;&lt;\\\\",
+    "email": "omni@zvex.us",
+    "url":  "http://zvex.us/about.html"
+  },
+  "homepage": "http://everythingsdangerous.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://gitub.com/openshift/origin-server"
+  },
+
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+
+  "dependencies": {
+	
+		"express": "*",
+		"socket.io": "*",
+		"mongoose": "*",
+		"colors": "*"
+	
+
+  },
+  
+  "devDependencies": {},
+  
+  "bundleDependencies": [],
+
+  "private": true,
+  
+  "scripts": { "start": "supervisor <relative-path-from-repo-to>/server.js" },
+  
+  "main": "server.js"
+}

@@ -1,0 +1,63 @@
+*
+* Converted by QMAC from: c:\fleshpot\!.mac
+*
+@tab    MacroBegin SetScreenOff Label1: CursorRight DropAnchor EndFile
+        DropAnchor PrevPosition Find "<" Return "L" Return JTrue Label0:
+        BegFile Jump Label1: Label0: UnmarkBlock SetScreenOn CursorRight
+        AltWordSet MarkWord MakeCtrOfScreen DefaultWordSet
+
+@`      MacroBegin SetScreenOff Label1: CursorLeft DropAnchor BegFile
+        DropAnchor PrevPosition Find "<" Return "LB" Return JTrue Label0:
+        EndFile Jump Label1: Label0: UnmarkBlock SetScreenOn CursorRight
+        AltWordSet MarkWord MakeCtrOfScreen DefaultWordSet
+
+@enter  MacroBegin SetScreenOff AltWordSet MarkWord DefaultWordSet GotoBlockBeg
+        CursorLeft isCurrChar "<" MacroQuitFalse CursorRight isCurrChar "."
+        JTrue Label0: CursorRight isCurrChar ":" JTrue Label1: Copy BegFile
+        DupLine EndLine DelLtWord Paste MarkLine Cut SetScreenOn EditFile Paste
+        Return MacroQuit Label0: Label1: Copy SetScreenOn EditFile Paste Return
+        EndFile
+
+@backspace MacroBegin SetScreenOff Label1: AltWordSet MarkWord JTrue Label0:
+        DefaultWordSet CursorLeft MacroQuitFalse Jump Label1: Label0:
+        GotoBlockEnd Label6: CursorLeft isCurrChar "." JTrue Label2: isCurrChar
+        "," JTrue Label3: isCurrChar "?" JTrue Label4: Jump Label5: Label2:
+        Label3: Label4: MarkBlockEnd Jump Label6: Label5: DefaultWordSet Cut ""
+        ">" CursorLeft Paste "<" UnmarkBlock BegFile DupLine MarkLine
+        StoreScrbuff "from" Return EndLine DelLtWord Paste MarkLine Cut
+        SaveFile EditFile "@Klock" Return EndFile isEmptyLine JTrue Label7:
+        Return Label7: ">" CursorLeft Paste "<" AddLine BegFile SaveFile
+        EditFile Paste Return BegFile CurrentFilename Return GetScrbuff "from"
+        Return "<" EndLine ">" Return SaveFile
+
+@escape MacroBegin SetScreenOff Label1: AltWordSet MarkWord JTrue Label0:
+        DefaultWordSet CursorLeft MacroQuitFalse Jump Label1: Label0:
+        GotoBlockEnd Label6: Label7: CursorLeft isCurrChar "." JTrue Label2:
+        isCurrChar "," JTrue Label3: isCurrChar "?" JTrue Label4: Jump Label5:
+        Label2: Label3: Label4: MarkBlockEnd Jump Label6: MarkBlockEnd Jump
+        Label7: Label5: DefaultWordSet Cut "<" Paste GotoBlockEnd "._\!>"
+        BegFile DupLine MarkLine StoreScrbuff "from" Return EndLine DelLtWord
+        Paste EndLine "._" Cut SaveFile Dos "md " Paste Return Return EditFile
+        "@Klock" Return EndFile isEmptyLine JTrue Label8: Return Label8: "<"
+        Paste EndLine "\!>" Return BegFile SaveFile EditFile Paste "\!" Return
+        BegFile CurrentFilename Return GetScrbuff "from" Return "<" EndLine ">"
+        Return SaveFile
+
+@=      MacroBegin AltWordSet MarkWord DefaultWordSet SetScreenOff Copy Label0:
+        Label1: Find Paste Return "G" Return MacroQuitTrue BegFile Jump Label0:
+        NextFile Jump Label1:
+
+@f1     MacroBegin SetScreenOff BegFile MarkLine Copy EditFile "@Klock" Return
+        EndFile isEmptyLine JTrue Label0: Return Label0: Paste "<" EndLine ">"
+        Return SaveFile EditFile Paste Return
+
+@f2     MacroBegin "<c:\Fleshpot\@Klock>"
+
+@f4     MacroBegin AltWordSet MarkWord DefaultWordSet StoreScrbuff "snagged"
+
+@f5     MacroBegin "<" GetScrbuff "snagged" Return GotoBlockEnd ">"
+
+@f9     Dos
+
+@f12    ListFiles
+
